@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jake Moss Psychotherapy</title>
+  <style>
+    :root {
+      --bg: #f7f0e8;
+      --bg-soft: #fffaf6;
+      --bg-card: #f8f1ea;
+      --bg-dark: #6b4331;
+      --bg-dark-2: #7a4b34;
+      --text: #3b2416;
+      --text-soft: #684b39;
+      --text-muted: #8a6248;
+      --border: #dcc7b6;
+      --white: #ffffff;
+      --shadow: 0 10px 30px rgba(61, 36, 23, 0.08);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --max: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 250, 246, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 0;
+      flex-wrap: wrap;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: #4a2e1f;
+    }
+
+    .brand-sub {
+      margin: 4px 0 0;
+      font-size: 14px;
+      color: #7b5b47;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #6d4c39;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      transition: 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      background: var(--bg-dark-2);
+      color: var(--white);
+    }
+
+    section {
+      display: none;
+      padding: 56px 0;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .eyebrow {
+      margin: 0;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+    }
+
+    .hero-grid,
+    .two-col,
+    .about-grid,
+    .grid-3,
+    .contact-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: end;
+      gap: 40px;
+    }
+
+    .two-col {
+      grid-template-columns: 1.1fr 0.9fr;
+      margin-top: 48px;
+    }
+
+    .about-grid {
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 40px;
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    h1 {
+      margin: 16px 0 0;
+      font-size: clamp(46px, 8vw, 76px);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      color: #3d2417;
+      max-width: 800px;
+    }
+
+    h2 {
+      margin: 16px 0 0;
+      font-size: clamp(34px, 5vw, 46px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: #3d2417;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.1;
+      color: #3d2417;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 500px;
+      font-size: 20px;
+      line-height: 1.7;
+      color: var(--text-soft);
+    }
+
+    .copy,
+    .card-copy {
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--text-soft);
+    }
+
+    .copy { margin: 20px 0 0; }
+    .card-copy { margin: 16px 0 0; }
+
+    .button-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn,
+    button.btn {
+      border: none;
+      border-radius: 999px;
+      padding: 16px 24px;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: inherit;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--bg-dark-2);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: #653b28;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.7);
+      color: #5a3a28;
+      border: 1px solid #c9ac95;
+    }
+
+    .btn-secondary:hover {
+      background: #f5ebe2;
+    }
+
+    .card-dark {
+      border-radius: var(--radius-xl);
+      background: var(--bg-dark);
+      color: #fff7f1;
+      padding: 40px;
+      box-shadow: 0 20px 80px rgba(61,36,23,0.18);
+    }
+
+    .card-dark h2,
+    .card-dark h3,
+    .card-dark .copy,
+    .card-dark .card-copy,
+    .card-dark .eyebrow {
+      color: #fff7f1;
+    }
+
+    .card-dark .eyebrow,
+    .mini-label {
+      color: #ead9cf;
+    }
+
+    .stack {
+      display: grid;
+      gap: 20px;
+    }
+
+    .card-dark-2 {
+      border-radius: var(--radius-xl);
+      background: var(--bg-dark-2);
+      color: var(--white);
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(61,36,23,0.14);
+    }
+
+    .card-soft,
+    .card-light,
+    .card-border,
+    .card-gradient,
+    .form-card,
+    .contact-row {
+      box-shadow: var(--shadow);
+    }
+
+    .card-soft {
+      border-radius: var(--radius-xl);
+      background: var(--bg-card);
+      padding: 28px;
+    }
+
+    .mini-panel {
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.10);
+      padding: 20px;
+      margin-top: 16px;
+    }
+
+    .mini-label {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .mini-value {
+      margin: 8px 0 0;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .card-light {
+      border-radius: 28px;
+      background: var(--bg-soft);
+      padding: 28px;
+    }
+
+    .card-border {
+      border-radius: 28px;
+      border: 1px solid #ead8ca;
+      background: rgba(255,255,255,0.8);
+      padding: 32px;
+    }
+
+    .card-gradient {
+      border-radius: 28px;
+      background: linear-gradient(180deg, #fffaf6 0%, #f4e5d8 100%);
+      padding: 32px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-radius: 16px;
+      background: var(--white);
+      padding: 16px;
+      color: #4a2e1f;
+      margin-top: 16px;
+    }
+
+    .icon {
+      color: #8a5439;
+      font-size: 18px;
+      width: 20px;
+      text-align: center;
+      flex: 0 0 20px;
+    }
+
+    .form-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid #ead8ca;
+      background: var(--white);
+      padding: 32px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #5d4030;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid #e1cbbb;
+      padding: 14px 16px;
+      font-size: 16px;
+      font-family: inherit;
+      outline: none;
+      background: var(--white);
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .form-note {
+      margin-top: 12px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #8a6a57;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .two-col,
+      .about-grid,
+      .grid-3,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(var(--max), calc(100% - 32px));
+      }
+
+      section {
+        padding: 40px 0;
+      }
+
+      .card-dark,
+      .card-dark-2,
+      .card-soft,
+      .card-light,
+      .card-border,
+      .card-gradient,
+      .form-card {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <div>
+        <p class="brand-title">Jake Moss Psychotherapy</p>
+        <p class="brand-sub">Online Private Practice</p>
+      </div>
+      <nav>
+        <a href="#home" class="nav-link active" data-target="home">Home</a>
+        <a href="#about" class="nav-link" data-target="about">About</a>
+        <a href="#services" class="nav-link" data-target="services">Services</a>
+        <a href="#contact" class="nav-link" data-target="contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="active">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">Online psychotherapy</p>
+            <h1>A calm, modern space to talk, think, and make sense of what has been difficult.</h1>
+          </div>
+          <div>
+            <p class="lead">I offer online therapy for adults dealing with anxiety, OCD, low mood, relationship struggles, and self-worth difficulties. The work is shaped around you, because no two people need exactly the same thing.</p>
+            <div class="button-row">
+              <a href="#contact" class="btn btn-primary" data-target="contact">Book a Consultation</a>
+              <a href="#about" class="btn btn-secondary" data-target="about">Learn More</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="card-dark">
+            <p class="eyebrow">What therapy is</p>
+            <h2>A place to slow down and make sense of what has been hard.</h2>
+            <p class="copy">Therapy is a space to talk openly about what is going on in your life. It can help you feel more understood, notice patterns that keep repeating, and find a different way forward. Sometimes people come because life feels too much. Sometimes they come because they feel stuck and do not know why. Both are welcome.</p>
+          </div>
+
+          <div class="stack">
+            <div class="card-dark-2">
+              <p class="eyebrow">At a glance</p>
+              <div class="mini-panel">
+                <p class="mini-label">Format</p>
+                <p class="mini-value">Online only</p>
+              </div>
+              <div class="mini-panel">
+                <p class="mini-label">Session length</p>
+                <p class="mini-value">50 minutes</p>
+              </div>
+              <div class="mini-panel">
+                <p class="mini-label">Approach</p>
+                <p class="mini-value">Tailored to the person</p>
+              </div>
+            </div>
+
+            <div class="card-soft">
+              <p class="eyebrow">How I work</p>
+              <p class="copy">I do not believe everyone should be treated in exactly the same way. Some people need more space to reflect. Some need more structure. Some need both. I draw from different ways of working so therapy can feel right for the person sitting in front of me.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div>
+            <p class="eyebrow">About</p>
+            <h2>About me and my journey</h2>
+          </div>
+          <div>
+            <p class="copy" style="margin-top:0;">I came to psychotherapy through both personal experience and a deep interest in understanding how people suffer, cope, and change. My own experiences have shaped the way I think about therapy: not as something cold or distant, but as a real human meeting where difficult things can be spoken about and understood.</p>
+            <p class="copy">I have lived experience of OCD, and that has given me a special interest in this area of clinical work. I understand how exhausting intrusive thoughts, doubt, fear, and mental rituals can be, and how isolating it can feel when your mind will not let you rest.</p>
+            <p class="copy">Alongside this, my training has helped me develop a way of working that is thoughtful, flexible, and grounded in relationship. I aim to offer a space where people can feel safe enough to be honest, curious about their inner world, and less alone with what they are carrying.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card-light">
+            <p class="eyebrow">Special interest</p>
+            <h3 style="margin-top:16px;">OCD</h3>
+            <p class="card-copy">Particular interest in intrusive thoughts, compulsions, shame, doubt, and the deeper emotional experience around OCD.</p>
+          </div>
+          <div class="card-light">
+            <p class="eyebrow">Style</p>
+            <h3 style="margin-top:16px;">Warm and thoughtful</h3>
+            <p class="card-copy">A calm, collaborative approach that makes room for both reflection and change.</p>
+          </div>
+          <div class="card-light">
+            <p class="eyebrow">Format</p>
+            <h3 style="margin-top:16px;">Online therapy</h3>
+            <p class="card-copy">Consistent, private online sessions for adults looking for support wherever they are based.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Services</p>
+            <h2>Areas of focus</h2>
+          </div>
+          <p class="lead" style="font-size:18px; max-width:520px;">A mix of reflection, emotional understanding, and practical support, shaped around the person rather than a one-size-fits-all method.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card-border">
+            <h3>What therapy can be</h3>
+            <p class="card-copy">Therapy is a space to slow down and talk honestly about what has been hard. Over time, it can help you notice patterns, understand yourself more clearly, and find a different way forward.</p>
+          </div>
+          <div class="card-border">
+            <h3>Shaped around you</h3>
+            <p class="card-copy">No two people are the same. I draw from different ways of working so the therapy fits your needs, your pace, and what feels most useful for you.</p>
+          </div>
+          <div class="card-border">
+            <h3>Online for now</h3>
+            <p class="card-copy">At the moment, I offer therapy online only. This can still feel personal, steady, and deeply supportive.</p>
+          </div>
+        </div>
+
+        <div style="margin-top:64px;">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Who I work with</p>
+              <h2>Support shaped around real difficulties</h2>
+            </div>
+            <p class="lead" style="font-size:18px; max-width:520px;">Support for people who want therapy that feels thoughtful, personal, and responsive to what they are actually living through.</p>
+          </div>
+
+          <div class="grid-3">
+            <div class="card-gradient">
+              <h3>Anxiety and overthinking</h3>
+              <p class="card-copy">For people who feel stuck in worry, self-doubt, panic, or loops of thought that are hard to switch off.</p>
+            </div>
+            <div class="card-gradient">
+              <h3>OCD</h3>
+              <p class="card-copy">I have a particular interest in working with OCD, including intrusive thoughts, compulsive patterns, shame, doubt, and the exhaustion that can come from living in a constant state of mental checking.</p>
+            </div>
+            <div class="card-gradient">
+              <h3>Relationships and self-worth</h3>
+              <p class="card-copy">For people who want to better understand their relationships, build steadier self-esteem, and make sense of repeating patterns.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-grid">
+          <div>
+            <p class="eyebrow">Contact</p>
+            <h2>Get in touch</h2>
+            <p class="copy">If you would like to enquire about therapy, ask a question, or arrange an initial consultation, you are welcome to get in touch by email.</p>
+
+            <div class="contact-row">
+              <span class="icon">✉</span>
+              <span>jmosstherapy@gmail.com</span>
+            </div>
+            <div class="contact-row">
+              <span class="icon">◷</span>
+              <span>Weekday daytime and evening online appointments</span>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <form id="contact-form">
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" required />
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="Your email address" required />
+              </div>
+              <div class="field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="How can I help?" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%; padding:18px 24px;">Send Enquiry</button>
+              <p id="form-status" class="form-note">This version opens the visitor’s email app and pre-fills an email to jmosstherapy@gmail.com.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const links = document.querySelectorAll('[data-target]');
+    const sections = document.querySelectorAll('main section');
+
+    function showSection(target) {
+      sections.forEach(section => {
+        section.classList.toggle('active', section.id === target);
+      });
+
+      links.forEach(link => {
+        link.classList.toggle('active', link.dataset.target === target);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSection(link.dataset.target);
+      });
+    });
+
+    const initial = window.location.hash.replace('#', '');
+    if (initial && document.getElementById(initial)) {
+      showSection(initial);
+    } else {
+      showSection('home');
+    }
+
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        if (!name || !email || !message) {
+          formStatus.textContent = 'Please complete all fields before sending your enquiry.';
+          return;
+        }
+
+        const subject = encodeURIComponent(`Website enquiry from ${name}`);
+        const body = encodeURIComponent(
+          `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+        );
+
+        window.location.href = `mailto:jmosstherapy@gmail.com?subject=${subject}&body=${body}`;
+        formStatus.textContent = 'Your email app should now open with your enquiry pre-filled.';
+      });
+    }
+  </script>
+</body>
+</html>
